@@ -1,43 +1,44 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parent.parent
 
 # Title
 st.title("Predictive Maintenance Dashboard")
 
 # Load data
 train_df = pd.read_csv(
-    r"C:\Users\adity\Documents\predictive-maintenance\data\train_FD001.txt",
-    sep=r"\s+",
-    header=None
+    BASE / "data" / "processed_train.csv"
 )
 
 # Remove extra columns
-train_df = train_df.iloc[:, :26]
+# train_df = train_df.iloc[:, :26]
 
 # Column names
-columns = ['unit_number', 'time_in_cycles']
+# columns = ['engine_id', 'cycle']
 
-for i in range(1, 4):
-    columns.append(f'op_setting_{i}')
+# for i in range(1, 4):
+#     columns.append(f'op_setting_{i}')
 
-for i in range(1, 22):
-    columns.append(f'sensor_{i}')
+# for i in range(1, 22):
+#     columns.append(f'sensor_{i}')
 
-train_df.columns = columns
+# train_df.columns = columns
 
 # Sidebar
 st.sidebar.header("Engine Selection")
 
 selected_engine = st.sidebar.slider(
     "Select Engine Number",
-    min_value=int(train_df["unit_number"].min()),
-    max_value=int(train_df["unit_number"].max()),
+    min_value=int(train_df["engine_id"].min()),
+    max_value=int(train_df["engine_id"].max()),
     value=1
 )
 # Filter engine
 engine_data = train_df[
-    train_df['unit_number'] == selected_engine
+    train_df['engine_id'] == selected_engine
 ]
 
 # Show dataframe
@@ -50,7 +51,7 @@ st.subheader("Sensor 2 Trend")
 fig, ax = plt.subplots(figsize=(10,5))
 
 ax.plot(
-    engine_data['time_in_cycles'],
+    engine_data['cycle'],
     engine_data['sensor_2']
 )
 
@@ -60,15 +61,9 @@ ax.set_ylabel("Sensor 2")
 st.pyplot(fig)
 
 # RUL estimation
-max_cycle = engine_data[
-    'time_in_cycles'
-].max()
+current_cycle = engine_data["cycle"].iloc[-1]
 
-current_cycle = engine_data[
-    'time_in_cycles'
-].iloc[-1]
-
-estimated_rul = max_cycle - current_cycle
+estimated_rul = max(1, 250 - current_cycle)
 
 # Display metrics
 st.subheader("Remaining Useful Life")
