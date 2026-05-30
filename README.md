@@ -50,4 +50,18 @@ Predictive-Maintenance-System/
 │
 ├── requirements.txt
 └── README.md
-```
+
+
+## Dashboard Preview
+
+### Main Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Engine 100 Analysis
+![Engine100](screenshots/dashboard_engine_100.png)
+
+### LSTM Training
+![Training](screenshots/lstm_training.png)
+
+### Project Structure
+![Structure](screenshots/project_structure.png)
