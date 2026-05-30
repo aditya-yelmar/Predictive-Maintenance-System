@@ -51,17 +51,16 @@ Predictive-Maintenance-System/
 ├── requirements.txt
 └── README.md
 
-
 ## Dashboard Preview
 
-### Main Dashboard
-![Dashboard](screenshots/dashboard.png)
+### Dashboard Overview
+![Dashboard Overview](screenshots/dashboard_overview.png)
 
-### Engine 100 Analysis
-![Engine100](screenshots/dashboard_engine_100.png)
+### LSTM Model Training
+![LSTM Training](screenshots/lstm_training.png)
 
-### LSTM Training
-![Training](screenshots/lstm_training.png)
+### FastAPI Service
+![FastAPI Running](screenshots/fastapi_running.png)
 
 ### Project Structure
-![Structure](screenshots/project_structure.png)
+![Project Structure](screenshots/Project_structure.png)
